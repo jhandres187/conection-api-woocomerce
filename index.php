@@ -20,11 +20,13 @@ $page = 1;
 $orders = [];
 $all_orders = [];
 do{
-  try {
-    $orders = $woocommerce->get('orders',array('per_page' => 100, 'page' => $page,'status' =>'processing'));
-  }catch(HttpClientException $e){
-    die("Can't get products: $e");
-  }
+    try {
+        //code...
+        $orders = $woocommerce->get('orders',array('per_page' => 100, 'page' => $page,'status' =>'processing'));
+    } catch (Exception $e) {
+        //throw $th;
+        die("Can't get products: $e");
+    }
   $all_orders = array_merge($all_orders,$orders);
   $page++;
 } while (count($orders) > 0);
